@@ -1,0 +1,10 @@
+[server]
+# Required for Render: bind to all interfaces
+headless = true
+
+# Reduce chunk loading issues on cold start / after sleep
+maxUploadSize = 200
+
+[browser]
+# Encourage fresh loads to avoid stale JS chunk errors
+gatherUsageStats = false
