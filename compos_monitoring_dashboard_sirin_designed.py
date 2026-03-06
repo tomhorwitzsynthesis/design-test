@@ -55,7 +55,7 @@ COLOR_WARNING = "#D4A017"
 # Plotly layout template (Synthesis styling)
 # Extra top margin to prevent title/legend overlap
 PLOTLY_LAYOUT = dict(
-    font=dict(family="DM Sans, Helvetica Neue, Helvetica, Arial, sans-serif", size=12, color=COLOR_TEXT_BODY),
+    font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=12, color=COLOR_TEXT_BODY),
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
     margin=dict(l=48, r=48, t=72, b=48),
@@ -65,8 +65,8 @@ PLOTLY_LAYOUT = dict(
         zeroline=False,
         linecolor=COLOR_BORDER_STRONG,
         linewidth=1,
-        tickfont=dict(size=11, color=COLOR_TEXT_MUTED),
-        title_font=dict(size=11, color=COLOR_TEXT_MUTED),
+        tickfont=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=11, color=COLOR_TEXT_MUTED),
+        title_font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=11, color=COLOR_TEXT_MUTED),
     ),
     yaxis=dict(
         gridcolor=COLOR_BORDER,
@@ -74,12 +74,12 @@ PLOTLY_LAYOUT = dict(
         zeroline=False,
         linecolor=COLOR_BORDER_STRONG,
         linewidth=1,
-        tickfont=dict(size=11, color=COLOR_TEXT_MUTED),
-        title_font=dict(size=11, color=COLOR_TEXT_MUTED),
+        tickfont=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=11, color=COLOR_TEXT_MUTED),
+        title_font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=11, color=COLOR_TEXT_MUTED),
     ),
     showlegend=True,
     legend=dict(
-        font=dict(size=11, color=COLOR_TEXT_MUTED),
+        font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=11, color=COLOR_TEXT_MUTED),
         orientation="h",
         yanchor="bottom",
         y=1.12,
@@ -89,7 +89,7 @@ PLOTLY_LAYOUT = dict(
     hoverlabel=dict(
         bgcolor=COLOR_BG,
         bordercolor=COLOR_BORDER,
-        font=dict(size=12),
+        font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=12),
     ),
 )
 
@@ -117,7 +117,11 @@ def inject_synthesis_css():
             --space-7: 48px;
             --space-8: 64px;
         }
-        .stApp { font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
+        .stApp, .stApp *, [data-testid="stAppViewContainer"], [data-testid="stAppViewContainer"] *,
+        h1, h2, h3, h4, h5, h6, p, span, div, label, a, input, select, button {
+            font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        }
+        .stApp { overflow-x: hidden; }
         .synthesis-header-wrapper {
             width: 100vw; max-width: 100vw;
             margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
@@ -132,12 +136,14 @@ def inject_synthesis_css():
         }
         .synthesis-dash { max-width: 1440px; margin: 0 auto; padding: 32px clamp(24px, 4vw, 64px); }
         .synthesis-label {
+            font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 11px; font-weight: 500; text-transform: uppercase;
             letter-spacing: 0.08em; color: var(--color-text-muted);
         }
         .synthesis-section-header { margin-bottom: 48px; }
         .synthesis-section-meta { margin-bottom: 12px; }
         .synthesis-section-title {
+            font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 1.125rem; font-weight: 700;
             color: var(--color-text-primary); line-height: 1.1;
             margin: 0 0 24px 0;
@@ -151,17 +157,19 @@ def inject_synthesis_css():
             display: flex; flex-direction: column; gap: 8px;
         }
         .synthesis-stat-value {
+            font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900;
             color: var(--color-text-primary); line-height: 1.0;
             letter-spacing: -0.02em;
         }
-        .synthesis-stat-delta { font-size: 13px; color: var(--color-text-muted); }
+        .synthesis-stat-delta { font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; color: var(--color-text-muted); }
         .synthesis-stat-delta.positive { color: var(--color-accent); }
         .synthesis-chart-block {
             background: var(--color-bg); border: 1px solid var(--color-border);
             border-radius: var(--radius-md); padding: 32px;
         }
         .synthesis-chart-caption {
+            font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 11px; color: #BBBBBB; margin: 12px 0 0 0; letter-spacing: 0.02em;
         }
         .synthesis-article-card {
@@ -169,6 +177,7 @@ def inject_synthesis_css():
             padding: 12px 16px; margin-bottom: 8px; background: var(--color-surface);
         }
         .synthesis-article-card a {
+            font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             color: var(--color-text-primary); text-decoration: none; font-weight: 500;
         }
         .synthesis-article-card a:hover { color: var(--color-accent); }
@@ -194,6 +203,14 @@ def inject_synthesis_css():
         }
         [data-testid="stSidebar"] > div:first-child {
             padding-top: 24px; padding-left: 24px; padding-right: 24px;
+        }
+        /* Streamlit markdown / body text */
+        [data-testid="stMarkdown"], [data-testid="stMarkdown"] *, [data-testid="stMarkdown"] p, [data-testid="stMarkdown"] li, [data-testid="stMarkdown"] a {
+            font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        }
+        /* Tabs */
+        [data-baseweb="tab-list"] *, [data-baseweb="tab"] * {
+            font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         }
         </style>
         """,
@@ -366,7 +383,7 @@ for i, row in summary_df.iterrows():
             marker=dict(size=12, color=colors[i], line=dict(width=2, color=COLOR_BG)),
             text=row["Company"],
             textposition="top center",
-            textfont=dict(size=11, color=COLOR_TEXT_PRIMARY),
+            textfont=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=11, color=COLOR_TEXT_PRIMARY),
             customdata=[[row["Archetypes"]]],
             hovertemplate="<b>%{text}</b><br>Volume: %{x}<br>Quality: %{y}<br>%{customdata[0]}<extra></extra>",
             showlegend=False,
@@ -375,7 +392,7 @@ for i, row in summary_df.iterrows():
 
 fig_scatter.update_layout(
     **PLOTLY_LAYOUT,
-    title=dict(text="Volume vs Quality by Company", font=dict(size=16, color=COLOR_TEXT_PRIMARY)),
+    title=dict(text="Volume vs Quality by Company", font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=16, color=COLOR_TEXT_PRIMARY)),
     xaxis_title="VOLUME (NUMBER OF ARTICLES)",
     yaxis_title="QUALITY (AVG. BMQ SCORE)",
 )
@@ -445,11 +462,11 @@ else:
         **sentiment_layout,
         margin=dict(l=48, r=48, t=48, b=80),
         barmode="stack",
-        title=dict(text="Sentiment Distribution (brackets show article count for selected period)", font=dict(size=16, color=COLOR_TEXT_PRIMARY)),
+        title=dict(text="Sentiment Distribution (brackets show article count for selected period)", font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=16, color=COLOR_TEXT_PRIMARY)),
         xaxis_title="COMPANY",
         yaxis_title="PERCENTAGE",
         legend=dict(
-            font=dict(size=11, color=COLOR_TEXT_MUTED),
+            font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=11, color=COLOR_TEXT_MUTED),
             orientation="h",
             yanchor="top",
             y=-0.18,
@@ -564,7 +581,7 @@ if non_organic_data:
         pie_layout = {k: v for k, v in PLOTLY_LAYOUT.items() if k not in ("showlegend", "margin")}
         fig_pie.update_layout(
             **pie_layout,
-            title=dict(text=title, font=dict(size=16, color=COLOR_TEXT_PRIMARY)),
+            title=dict(text=title, font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=16, color=COLOR_TEXT_PRIMARY)),
             showlegend=False,
             margin=dict(t=48, b=24, l=24, r=24),
         )
@@ -661,12 +678,12 @@ vol_layout = {k: v for k, v in PLOTLY_LAYOUT.items() if k not in ("xaxis", "lege
 xaxis_merged = {**PLOTLY_LAYOUT.get("xaxis", {}), "categoryorder": "array", "categoryarray": month_labels_ts}
 fig_volume.update_layout(
     **vol_layout,
-    title=dict(text="Monthly Media Mentions Volume Trend per Company", font=dict(size=16, color=COLOR_TEXT_PRIMARY)),
+    title=dict(text="Monthly Media Mentions Volume Trend per Company", font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=16, color=COLOR_TEXT_PRIMARY)),
     xaxis_title="MONTH",
     yaxis_title="MEDIA MENTIONS VOLUME (ARTICLES)",
     xaxis=xaxis_merged,
     legend=dict(
-        font=dict(size=11, color=COLOR_TEXT_MUTED),
+        font=dict(family="'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif", size=11, color=COLOR_TEXT_MUTED),
         orientation="h",
         yanchor="top",
         y=-0.18,
